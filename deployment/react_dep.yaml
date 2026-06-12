@@ -11,8 +11,8 @@ spec:
     metadata:
       labels:
         app: myreactapp
-      spec:
+    spec:
         containers:
           - name:  myreactapp
-            image:  react-app:v1.20
+            image:  sunny19k98/react-app:v1.20
             
