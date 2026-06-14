@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mybackendapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backendapp
+  template:
+    metadata:
+      labels:
+        app: backendapp
+    spec:
+      containers:
+        - name: backendappimage
+          image: sunny19k98/my-backend:latest

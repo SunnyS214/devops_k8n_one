@@ -2,14 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
-
 spec:
   replicas: 5
-
   selector:
     matchLabels:  
       app: nginx
-
   template:
     metadata:
       labels:
