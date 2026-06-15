@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: namespaceapp
+  namespace: dev
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mynamespaceapp
+  template:  
+    metadata:
+      labels:
+        app: mynamespaceapp
+    spec:
+      containers:
+       -  name: backendapp
+          image:  sunny19k98/my-backend:latest    
