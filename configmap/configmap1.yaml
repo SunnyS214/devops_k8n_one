@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configap-dev
+data:
+  APP_NAME: myapp
+  PORT: "3000"

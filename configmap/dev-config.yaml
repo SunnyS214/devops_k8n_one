@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-config
+spec:
+  replicas: 3
+  selector:
+    matchLabels: 
+      app: devconfig
+  template:
+    metadata:
+      labels:    
+        app: devconfig
+    spec: 
+      containers:
+        -  name: nginx
+           image: nginx 
+           envFrom:
+             -  configMapRef:
+                 name:  configap-dev   #default : all key use hote hai
+                #  key: APP_NAME  #for specific key use karne ke liye 
