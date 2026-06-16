@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: hcdepl2
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: hcapp2
+  template:
+    metadata:
+      labels:
+        app: hcapp2
+    spec:
+      containers:
+        -  name: hcappcont
+           image: nginx
+           livenessProbe:
+             httpGet:
+               path: /
+               port: 80
+           readinessProbe:
+             httpGet:
+               path: /
+               port: 80

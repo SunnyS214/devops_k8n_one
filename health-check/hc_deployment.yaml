@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: healthcheckapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: healthcheckapp
+  template:
+    metadata:
+      labels:
+        app: healthcheckapp
+    spec:  
+      containers:
+        -  name: healthcheckapp  
+           image: nginx
+          #  probe1: liveness
+           livenessProbe:
+             httpGet:
+               path: /
+               port: 80
+           readinessProbe:
+             httpGet:
+               path: /
+               port: 80    
