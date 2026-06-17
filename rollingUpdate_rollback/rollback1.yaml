@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rollback1
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 0
+ 
+  selector:
+    matchLabels:
+        app: rollbackapp
+      
+  template:
+    metadata:
+      labels:
+        app: rollbackapp
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.23
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+         
+                
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80    
