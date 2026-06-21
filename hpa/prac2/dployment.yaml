@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecomtwo
+spec:
+  replicas: 4
+  selector: 
+    matchLabels:
+      app: ecomtwo
+  template:
+    metadata:
+      labels:
+        app: ecomtwo
+    spec:
+      containers:
+        - name: nginxapp
+          image: nginx
+          #resource
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          # health check
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80

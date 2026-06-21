@@ -1,0 +1,40 @@
+# ==========================================
+# FRONTEND DEPLOYMENT
+# ==========================================
+# Deployment = pods banata hai aur manage karta hai
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 2                    # 2 pods chalenge
+  selector:
+    matchLabels:
+      app: frontend              # in pods ko track karo
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: nginx:alpine      # simple nginx server as frontend
+        ports:
+        - containerPort: 80
+
+---
+# ==========================================
+# FRONTEND SERVICE
+# ==========================================
+# Service = pods ko ek stable naam/address deta hai
+# Ingress directly pods se baat nahi karta — Service se karta hai
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc            # Ingress is naam se janega
+spec:
+  selector:
+    app: frontend               # frontend label wale pods ko connect karo
+  ports:
+  - port: 80
+    targetPort: 80
